@@ -3,15 +3,25 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <filesystem>
+
 
 void readPatternFromFile(const std::string& filename, std::vector<std::vector<int>>& pattern) {
+    namespace fs = std::filesystem;
+
+    // Get the current working directory
+    fs::path currentPath = fs::current_path();
+
+    // Construct the full path to the file
+    fs::path filePath = currentPath / filename;
+
     int counter_width = 0;
     int counter_height = 1;
     char ch;
 
-    std::ifstream input_file(filename, std::ios::in);
+    std::ifstream input_file(filePath.string(), std::ios::in);
     if (!input_file) {
-        std::cout << "No such file";
+        std::cout << "No such file: " << filePath << std::endl;
         return;
     }
 
@@ -45,6 +55,7 @@ void readPatternFromFile(const std::string& filename, std::vector<std::vector<in
     input_file.close();
 }
 
+
 //This function is printing the current state of the 'Game of Life'-Grid to the terminal
 void printPattern(const std::vector<std::vector<int>>& pattern) {
     for (const auto& row : pattern) {
@@ -72,16 +83,16 @@ void createnextPattern(std::vector<std::vector<int>>& pattern){
             //Counting alive cells in row above
             if (i>0 && j>0 && pattern[i-1][j-1] == 1) alive_neighbor += 1;
             if (i>0 && pattern[i-1][j] == 1) alive_neighbor += 1;
-            if (i>0 && j<pattern.size() && pattern[i-1][j+1] == 1) alive_neighbor += 1;
+            if (i>0 && j<pattern[i].size() && pattern[i-1][j+1] == 1) alive_neighbor += 1;
 
-            //Counting alive cells in current row
+            //Counting alive cells in current row   
             if (j>0 && pattern[i][j-1] == 1) alive_neighbor += 1;
-            if (j<pattern.size() && pattern[i][j+1] == 1) alive_neighbor += 1;
+            if (j<pattern[i].size() && pattern[i][j+1] == 1) alive_neighbor += 1;
 
             //Counting alive cells in row bellow
             if (i<pattern.size()-1 && j>0 && pattern[i+1][j-1] == 1) alive_neighbor += 1;
             if (i<pattern.size()-1 && pattern[i+1][j] == 1) alive_neighbor += 1;
-            if (i<pattern.size()-1 && j<pattern.size() && pattern[i+1][j+1] == 1) alive_neighbor += 1;
+            if (i<pattern.size()-1 && pattern[i].size() && pattern[i+1][j+1] == 1) alive_neighbor += 1;
 
 
             //implement the rules of game of life
@@ -112,17 +123,21 @@ void createnextPattern(std::vector<std::vector<int>>& pattern){
 }
 
 int main() {
+    //Change the Textfile in the next line to Test different pattern. 
+    //Currently available: "Testgame.txt", "Blinker.txt", "Pentadecathlon.txt"
+    std::string testfile = "Testgame.txt";          
+    std::string testing_subfolder = "Testfiles/";
+    testfile = testing_subfolder + testfile;
     std::vector<std::vector<int>> gameArray;
-    readPatternFromFile("Testgame.txt", gameArray);
+    readPatternFromFile(testfile, gameArray);
     printPattern(gameArray);
-    //createnextPattern(gameArray);
 
     int counter = 0;
 
     while(1){
 
         counter ++;
-        std::cout << counter << std::endl;
+        std::cout << "Timestep " << counter << ":" << std::endl;
         std::cout << std::endl;
         createnextPattern(gameArray);
 
