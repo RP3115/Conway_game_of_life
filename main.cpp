@@ -1,64 +1,63 @@
+#include "Workflow.h"
 #include <iostream>
-#include <fstream>
-#include <vector>
-#include <thread>
-#include <chrono>
-#include <cstdlib> 
-#include <ctime>   
-
-#include "components.h"
-//#include "Simulation.h"
-
-class Workflow {
-
-};
-void take_input(int x,int y, Grid &myGrid){
-    int k=0;
-    for(int i=0;i<x;i++){
-        for(int j=0;j<y;j++){
-            std::cin>>k;
-            myGrid.setCellValue(i,j,k);
-        }
-    }
-}
 
 int main() {
-    // Testing code -->
-    // const int rows = 5;
-    // const int cols = 5;
-    int rows,cols;
-    std::cin>>rows>>cols;
-    // Create a grid with 3 rows and 4 columns
-    Grid myGrid(rows, cols);
+  char choice;
+  do {
+    std::cout << "**********Choose**********\n"
+              << "Press (r) for creating a random grid\n"
+              << "Press (t) for using a testfile" << std::endl;
 
-    // Set some cell values
-    take_input(rows,cols,myGrid);
-    // Display the grid
-    Simulation mySimulation(myGrid);
+    std::cin >> choice;  
 
-    // Display the initial grid
-    std::cout << "Initial Grid:" << std::endl;
-    mySimulation.displayGrid(myGrid);
-    std::cout << std::endl;
+    if (choice == 'r') {
+      // Ask the user for the number of rows
+      std::cout << "Enter the number of rows: ";
+      int rows;
+      std::cin >> rows;
 
-    // Call createnextGrid to generate the next state of the grid
-    Grid nextGrid = mySimulation.createnextGrid(myGrid);
+      // Ask the user for the number of columns
+      std::cout << "Enter the number of columns: ";
+      int cols;
+      std::cin >> cols;
 
-    // Display the next state of the grid
-    std::cout << "Next Grid:" << std::endl;
-    // Simulation nextSimulation(nextGrid);
-    mySimulation.displayGrid(nextGrid);
-    while(true){
-        // myGrid=nextGrid;
-        Grid nextGrid = mySimulation.createnextGrid(nextGrid);
+      // Ask the user for the number of timesteps
+      std::cout << "Enter the number of timesteps: ";
+      int timesteps;
+      std::cin >> timesteps;
 
-        // Display the next state of the grid
-        std::cout << "Next Grid:" << std::endl;
-        // Simulation nextSimulation(nextGrid);
-        mySimulation.displayGrid(nextGrid);
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+      // Create an instance of Workflow with the specified rows and columns
+      Workflow myWorkflow(rows, cols);
+
+      // Perform the workflow for a random grid
+      myWorkflow.createRandomGrid();
+      myWorkflow.simulateRandomGrid(timesteps);
+
+    } else if (choice == 't') {
+      std::cout << "Choice: Testfile!" << std::endl;
+
+    //////////////////////////////////////////////////////
+    //                                                  //
+    //                                                  //
+    //                                                  //
+    //                 TO Do RONAK                      //
+    //                                                  //
+    //       (Create a Workflow as next step)           //
+    //                                                  //
+    //////////////////////////////////////////////////////
+
+    } else {
+      std::cout << "It's fine if you cannot make up your mind. Maybe another time then...\n";
+      std::exit(EXIT_FAILURE);
     }
-    return 0;
-    
-}
 
+    // Ask the user if they want to start a new simulation
+    std::cout << "Do you want to start a new simulation? (y/n): ";
+    std::cin >> choice;
+
+  } while (choice == 'y' || choice == 'Y');
+
+  std::cout << "Exiting the program. Goodbye!\n";
+
+  return 0;
+}
