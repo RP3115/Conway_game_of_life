@@ -17,15 +17,15 @@ A dead cell
 # Sprint 2:
 
 Definition of "Done"
-* The code is refactored into classes, and OOP principles are observed. 
-* Classes for `Cell` and `Grid` have been added.
-* The simulation logic is stored in a separate class, with experimentation for a second update rule for all cells.
-* A workflow allowing the user to specify a file to load via the command line is implemented. This workflow is also stored in a separate class.
-* The option to create a random grid is added to the workflow, using the existing method as a reference.
-* The user can specify the number of time steps for which the simulation runs and can start the simulation.
-* The program does not exit after the last time step.
-* The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added.
-* (Optional) The simulation is animated in the terminal window, achieved by clearing the terminal and adding delays between simulation steps.
+* The code is refactored into classes and OOP principles are observed
+* Classes for Cell and Grid have been added as well 
+* The simulation logic is also stored in a separate class (try to experiment here with a second different update rule for all cells)
+* A workflow that allows the user to specify a file to load via the command line is implemented. The workflow is also stored in a separate class
+* The option to create a random grid is added to the workflow (look at [this](https://www.cplusplus.com/reference/cstdlib/rand/) for reference)
+* The user can specify the number of time steps for which the simulation runs, and can start the simulation
+* The program does not exit after the last time step 
+* The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added
+* (optional) The simulation is animated in the terminal window (this can be done by clearing the terminal and adding delays between simulation steps)
 
 <!-- 
 ## Building
