@@ -1,6 +1,18 @@
-# GameOfLife: 
-Conway's Game Of Life is an easy realization of a cellular automaton, which models dynamic but discrete systems.
+# Introduction to Game of Life:
+This project was made as a part of course Advanced Programming by Ronak ([go68sor@mytum.de](mailto:go68sor@mytum.de)) and Samuel ([go68yug@mytum.de](mailto:go68yug@mytum.de))
+
+[Conway's Game Of Life](https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens) is an easy realization of a cellular automaton, which models dynamic but discrete systems. 
 In this project, we create a simulation that realizes such systems.
+Rules:
+
+A living cell
+* stays alive, if it hast exact 2 or 3 neighbors
+* dies due to loneliness if it has fewer neighbors
+* dies due to overpopulation if it has more neighbors
+
+A dead cell
+* will be reborn if it has exactly 3 neighbors
+* remains dead otherwise
 
 # Sprint 2:
 
@@ -151,4 +163,10 @@ Updated Grid -- Timestep 3
 0 1 1 1
 
 Do you want to start a new simulation? (y/n):
+```
+
+# Cleaning the directory
+Just use the function :
+```shell
+make clean
 ```
