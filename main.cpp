@@ -89,7 +89,7 @@ int main() {
     inputFile.close();
     //Using the function
     // Workflow& myWorkflow=readfromfile(filename);
-    std::cout<<"The Initial state of out Grid is:"<<std::endl;
+    std::cout<<"The Initial state of our Grid is:"<<std::endl;
     myWorkflow.printgrid();
     std::cout << "Enter the number of timesteps: ";
     int timesteps;
