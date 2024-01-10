@@ -15,7 +15,7 @@ Definition of "Done"
 * The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added.
 * (Optional) The simulation is animated in the terminal window, achieved by clearing the terminal and adding delays between simulation steps.
 
-
+<!-- 
 ## Building
 
 Build GameOfLife in your terminal with:
@@ -25,14 +25,44 @@ mkdir build
 cd build
 cmake ..
 make
-```
+``` -->
 
 ## Running
 
-Run GameOfLife in your terminal with:
-
+1. Linux:
+Just use the makefile to run it in linux
 ```shell
-./GameOfLife
+$ make 
+$ ./gameoflife
+```
+
+2. Windows:
+Make some changes in files:
+
+Simulation.cpp: 
+At line 107 : Uncomment the windows part and comment the Linux part.
+```shell
+//Windows 
+ system("cls"); //clears the terminal
+
+//Linux 
+//system("clear"); //clears the terminal
+```
+
+Makefile: 
+In the clean command change : 
+```shell
+#Windows
+	-del -fR gameoflife.exe *.o 
+#Linux
+#	rm gameoflife *.o
+```
+
+Just use the makefile to run it now.
+```shell
+make 
+
+gameoflife.exe
 ```
 
 ## Example output
@@ -74,3 +104,51 @@ Do you want to start a new simulation? (y/n):
 After Simulation is finished, you can start again from the beginning, after entering "y".
 
 3. Option 2: Testfile:
+
+Enter name of the file for input. <!-- and timesteps. Right after entering those Informations, the Simulation will start! -->
+
+File syntax: 
+First line should contain number of rows and columns and subsequent lines should have the initial grid.
+```shell
+4 4
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
+```
+
+Enter the number of timesteps. Right after entering this Informations, the Simulation will start!
+```shell
+The Initial state of our Grid is:
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
+
+Enter the number of timesteps: 3
+Simulating the grid for 3 timesteps...
+Updated Grid -- Timestep 1
+1 1 1 0
+0 0 0 0
+0 0 0 1
+1 1 1 0
+0 0 1 0
+
+Updated Grid -- Timestep 2
+0 1 0 0
+0 1 0 0
+0 1 1 0
+0 1 1 0
+0 1 1 1
+0 0 1 0
+
+Updated Grid -- Timestep 3
+0 0 0 0
+1 1 0 0
+1 0 0 0
+1 0 0 0
+0 0 0 1
+0 1 1 1
+
+Do you want to start a new simulation? (y/n):
+```

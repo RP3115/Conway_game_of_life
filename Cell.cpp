@@ -23,9 +23,6 @@ void Cell::set_random_State() {
     _state = rand() % 2;
 }
 
-bool Cell::isAlive() const {
-    return _state == _alive;
-}
 
 Cell::~Cell() {}
 

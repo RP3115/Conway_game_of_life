@@ -3,7 +3,6 @@
 #include <filesystem>
 #include <fstream>
 
-// Workflow& readfromfile(std::string filename);
 
 int main() {
   char choice;
@@ -39,17 +38,10 @@ int main() {
       myWorkflow.simulateGrid(timesteps);
 
     } else if (choice == 't') {
-    //////////////////////////////////////////////////////
-    //                                                  //
-    //                                                  //
-    //                                                  //
-    //                 TO Do RONAK                      //
-    //                                                  //
-    //       (Create a Workflow as next step)           //
-    //                                                  //
-    //////////////////////////////////////////////////////
+
     std::cout << "Choice: Testfile!" <<std::endl<<"Input the name of the file: "<< std::endl;
     std::string filename;std::cin>>filename;
+    
     // Get the current working directory
     namespace fs = std::filesystem;
     fs::path currentPath = fs::current_path();
@@ -87,8 +79,7 @@ int main() {
     }
 
     inputFile.close();
-    //Using the function
-    // Workflow& myWorkflow=readfromfile(filename);
+    //end of input
     std::cout<<"The Initial state of our Grid is:"<<std::endl;
     myWorkflow.printgrid();
     std::cout << "Enter the number of timesteps: ";
@@ -110,43 +101,3 @@ int main() {
 
   return 0;
 }
-
-// Workflow& readfromfile(std::string filename){
-//   // Get the current working directory
-//   namespace fs = std::filesystem;
-//   fs::path currentPath = fs::current_path();
-
-//   // Construct the full path to the file
-//   fs::path filePath = currentPath / filename;
-//   std::ifstream inputFile(filePath.string());
-
-//   if (!inputFile) {
-//     std::cerr << "Error opening file: " << filename << std::endl;
-//     exit(EXIT_FAILURE);
-//   }
-
-//   std::string line;
-//   int row,col,timesteps;
-//   std::getline(inputFile,line);
-//   std::istringstream rc(line);
-//     int num;
-//     rc>>num;row=num;
-//     rc>>num;col=num;
-//     rc>>num;timesteps=num;
-//   Workflow myWorkflow(row,col);
-//   Grid& g=myWorkflow.givegrid();
-//   int i=0;
-//   while (std::getline(inputFile, line)) {
-//     std::istringstream iss(line);
-//     int value;
-//     int j=0;
-//     while (iss >> value) {
-//         g.setCell(i,j,value);
-//         j++;
-//     }
-//     i++;
-//   }
-
-//   inputFile.close();
-//   return myWorkflow;
-// }

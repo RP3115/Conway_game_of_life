@@ -10,11 +10,6 @@ void Workflow::createRandomGrid() {
     myGrid.randomizeGrid();
 }
 
-// void Workflow::simulateRandomGrid(int timesteps) {
-//     std::cout << "Simulating the random grid for " << timesteps << " timesteps..." << std::endl;
-//     mySimulation.update_Grid(myGrid, timesteps);
-// }
-
 void Workflow::simulateGrid(int timesteps) {
     std::cout << "Simulating the grid for " << timesteps << " timesteps..." << std::endl;
     mySimulation.update_Grid(myGrid, timesteps);

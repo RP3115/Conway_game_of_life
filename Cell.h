@@ -10,8 +10,7 @@ private:
 public:
     // Constructor
     Cell(int initialState = 0);
-    // Copy constructor
-    //Cell(const Cell& other);
+    
     // Copy assignment operator
     Cell& operator=(const Cell& other);
 
@@ -21,8 +20,7 @@ public:
     void setState(int newState);
     //Setter for random state
     void set_random_State();
-    //Kick this function out later/Use getState instead!
-    bool isAlive() const;
+    
 
     // Destructor 
     ~Cell();  
