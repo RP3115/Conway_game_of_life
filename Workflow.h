@@ -13,7 +13,10 @@ public:
     Workflow(int rows, int cols);
 
     void createRandomGrid();
-    void simulateRandomGrid(int timesteps);
+    // void simulateRandomGrid(int timesteps);
+    void simulateGrid(int timesteps);
+    void printgrid() const;
+    Grid& givegrid();
 };
 
 #endif
