@@ -74,3 +74,51 @@ Do you want to start a new simulation? (y/n):
 After Simulation is finished, you can start again from the beginning, after entering "y".
 
 3. Option 2: Testfile:
+
+Enter name of the file for input. <!-- and timesteps. Right after entering those Informations, the Simulation will start! -->
+
+File syntax: 
+First line should contain number of rows and columns and subsequent lines should have the initial grid.
+```shell
+4 4
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
+```
+
+Enter the number of timesteps. Right after entering this Informations, the Simulation will start!
+```shell
+The Initial state of our Grid is:
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
+
+Enter the number of timesteps: 3
+Simulating the grid for 3 timesteps...
+Updated Grid -- Timestep 1
+1 1 1 0
+0 0 0 0
+0 0 0 1
+1 1 1 0
+0 0 1 0
+
+Updated Grid -- Timestep 2
+0 1 0 0
+0 1 0 0
+0 1 1 0
+0 1 1 0
+0 1 1 1
+0 0 1 0
+
+Updated Grid -- Timestep 3
+0 0 0 0
+1 1 0 0
+1 0 0 0
+1 0 0 0
+0 0 0 1
+0 1 1 1
+
+Do you want to start a new simulation? (y/n):
+```
