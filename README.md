@@ -1,92 +1,172 @@
-# 29
+# Introduction to Game of Life:
+This project was made as a part of course Advanced Programming by Ronak ([go68sor@mytum.de](mailto:go68sor@mytum.de)) and Samuel ([go68yug@mytum.de](mailto:go68yug@mytum.de))
 
+[Conway's Game Of Life](https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens) is an easy realization of a cellular automaton, which models dynamic but discrete systems. 
+In this project, we create a simulation that realizes such systems.
+Rules:
 
+A living cell
+* stays alive, if it hast exact 2 or 3 neighbors
+* dies due to loneliness if it has fewer neighbors
+* dies due to overpopulation if it has more neighbors
 
-## Getting started
+A dead cell
+* will be reborn if it has exactly 3 neighbors
+* remains dead otherwise
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+# Sprint 2:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Definition of "Done"
+* The code is refactored into classes and OOP principles are observed
+* Classes for Cell and Grid have been added as well 
+* The simulation logic is also stored in a separate class (try to experiment here with a second different update rule for all cells)
+* A workflow that allows the user to specify a file to load via the command line is implemented. The workflow is also stored in a separate class
+* The option to create a random grid is added to the workflow (look at [this](https://www.cplusplus.com/reference/cstdlib/rand/) for reference)
+* The user can specify the number of time steps for which the simulation runs, and can start the simulation
+* The program does not exit after the last time step 
+* The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added
+* (optional) The simulation is animated in the terminal window (this can be done by clearing the terminal and adding delays between simulation steps)
 
-## Add your files
+<!-- 
+## Building
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Build GameOfLife in your terminal with:
 
+```shell
+mkdir build
+cd build
+cmake ..
+make
+``` -->
+
+## Running
+
+1. Linux:
+Just use the makefile to run it in linux
+```shell
+$ make 
+$ ./gameoflife
 ```
-cd existing_repo
-git remote add origin https://gitlab.lrz.de/advprog2023/29.git
-git branch -M main
-git push -uf origin main
+
+2. Windows:
+Make some changes in files:
+
+Simulation.cpp: 
+At line 107 : Uncomment the windows part and comment the Linux part.
+```shell
+//Windows 
+ system("cls"); //clears the terminal
+
+//Linux 
+//system("clear"); //clears the terminal
 ```
 
-## Integrate with your tools
+Makefile: 
+In the clean command change : 
+```shell
+#Windows
+	-del -fR gameoflife.exe *.o 
+#Linux
+#	rm gameoflife *.o
+```
 
-- [ ] [Set up project integrations](https://gitlab.lrz.de/advprog2023/29/-/settings/integrations)
+Just use the makefile to run it now.
+```shell
+make 
 
-## Collaborate with your team
+gameoflife.exe
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Example output
 
-## Test and Deploy
+1. Choose if you want to use a testfile or create an own random Grid
 
-Use the built-in continuous integration in GitLab.
+```shell
+**********Choose**********
+Press (r) for creating a random grid
+Press (t) for using a testfile
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+2. Option 1: Random-Grid:
 
-***
+Enter number of rows, columns and timesteps. Right after entering those Informations, the Simulation will start!
 
-# Editing this README
+```shell
+Enter the number of rows: 3
+Enter the number of columns: 3
+Enter the number of timesteps: 2
+Creating a random grid...
+1 0 1 
+1 1 1 
+0 0 1 
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Simulating the random grid for 2 timesteps...
+Updated Grid -- Timestep 1
+1 0 1 0 
+1 0 1 1 
+0 0 1 0 
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Updated Grid -- Timestep 2
+0 0 1 1 
+0 0 1 1 
+0 1 1 1 
 
-## Name
-Choose a self-explaining name for your project.
+Do you want to start a new simulation? (y/n): 
+```
+After Simulation is finished, you can start again from the beginning, after entering "y".
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+3. Option 2: Testfile:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Enter name of the file for input. <!-- and timesteps. Right after entering those Informations, the Simulation will start! -->
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+File syntax: 
+First line should contain number of rows and columns and subsequent lines should have the initial grid.
+```shell
+4 4
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
+```
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Enter the number of timesteps. Right after entering this Informations, the Simulation will start!
+```shell
+The Initial state of our Grid is:
+0 1 0 0
+1 1 0 1
+1 1 0 0
+0 1 1 1
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Enter the number of timesteps: 3
+Simulating the grid for 3 timesteps...
+Updated Grid -- Timestep 1
+1 1 1 0
+0 0 0 0
+0 0 0 1
+1 1 1 0
+0 0 1 0
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Updated Grid -- Timestep 2
+0 1 0 0
+0 1 0 0
+0 1 1 0
+0 1 1 0
+0 1 1 1
+0 0 1 0
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Updated Grid -- Timestep 3
+0 0 0 0
+1 1 0 0
+1 0 0 0
+1 0 0 0
+0 0 0 1
+0 1 1 1
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Do you want to start a new simulation? (y/n):
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+# Cleaning the directory
+Just use the function :
+```shell
+make clean
+```
