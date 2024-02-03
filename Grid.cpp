@@ -29,6 +29,14 @@ void Grid::setCell(int row, int col, int state) {
     _cells[row][col].setState(state);
 }
 
+int Grid::get_aliveNeigbors(int row, int col) const{
+    return _cells[row][col].get_alive_neighbors();
+}
+
+void Grid::set_neighbors(int row, int col, int neigbhors) {
+    _cells[row][col].set_neighbors(neigbhors);
+}
+
 void Grid::printGrid(bool saveGrid, int iteration) const {
     if (saveGrid == true) {
 

@@ -62,8 +62,6 @@
                 break;
             }
         }
-        
-        Grid updated_Grid = origin_Grid;
 
 
         //Simulation logic / Count neigbhors /////////////////////////////////////////////////////////
@@ -87,22 +85,29 @@
                 if (i<origin_Grid.size_row()-1 && j<origin_Grid.size_col() - 1 && origin_Grid.getCell(i+1,j+1).getState() == 1) alive_neighbor += 1;
 
 
-                //std::cout << alive_neighbor << " ";
-
-                //implement the rules of game of life
-                if (origin_Grid.getCell(i,j).getState() == true) {
-                    if(alive_neighbor == 2 || alive_neighbor == 3) updated_Grid.setCell(i,j,1);  //1,0 to alive dead!
-                    else updated_Grid.setCell(i,j,0);
-                } else {
-                    if( alive_neighbor == 3) updated_Grid.setCell(i,j,1);  //1,0 to alive, dead!
-                    else updated_Grid.setCell(i,j,0);
-                }
+                //Save number of neigbors to specific Cell
+                origin_Grid.set_neighbors(i,j, alive_neighbor);
 
             }     
-
-            //std::cout << std::endl; 
             
         }
+
+        //implement the rules of game of life by using previously saved number of neighbors
+        for (auto i = 0; i < origin_Grid.size_row(); i++)         
+        { 
+            for (auto j = 0; j < origin_Grid.size_col(); j++)  
+            {   
+                if (origin_Grid.getCell(i,j).getState() == true) {
+                    if(origin_Grid.get_aliveNeigbors(i,j) == 2 || origin_Grid.get_aliveNeigbors(i,j) == 3) origin_Grid.setCell(i,j,1);  
+                    else origin_Grid.setCell(i,j,0);
+                } else {
+                    if( origin_Grid.get_aliveNeigbors(i,j) == 3) origin_Grid.setCell(i,j,1);  
+                    else origin_Grid.setCell(i,j,0);
+                }
+            }
+        }
+
+
 
         //Windows 
         // system("cls"); //clears the terminal
@@ -111,8 +116,8 @@
         //system("clear"); //clears the terminal
 
         std::cout << "Updated Grid -- Timestep " << counter <<std::endl;
-        updated_Grid.printGrid(saveSim, counter);
-        origin_Grid = updated_Grid;
+        origin_Grid.printGrid(saveSim, counter);
+        //origin_Grid = updated_Grid;
         std::this_thread::sleep_for(std::chrono::seconds(2));
 
     }

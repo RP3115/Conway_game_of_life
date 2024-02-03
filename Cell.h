@@ -6,6 +6,7 @@ private:
     int _state;  // Either alive or dead
     const int _alive;
     const int _dead;
+    int _neighbors;
 
 public:
     // Constructor
@@ -20,6 +21,10 @@ public:
     void setState(int newState);
     //Setter for random state
     void set_random_State();
+    //Setter for alive neigbors
+    void set_neighbors(int alive_surr);
+    //Getter for alive neigbors
+    int get_alive_neighbors() const;
     
 
     // Destructor 

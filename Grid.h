@@ -25,6 +25,12 @@ class Grid {
     // Setter for modifying a specific cell
     void setCell(int row, int col, int state);
 
+    // Getter for getting alive neighbors
+    int get_aliveNeigbors(int row, int col) const;
+
+    // Setter for modifying alive neighbors
+    void set_neighbors(int row, int col, int neigbhors);
+
     //print grid
     void printGrid(bool saveGrid = false, int iteration = 0) const;
 

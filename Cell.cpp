@@ -1,7 +1,7 @@
 #include "Cell.h"
 #include <cstdlib>
 
-Cell::Cell(int initialState) : _alive(1), _dead(0), _state(initialState) {}
+Cell::Cell(int initialState) : _alive(1), _dead(0), _neighbors(0), _state(initialState) {}
 
 Cell& Cell::operator=(const Cell& other) {
     if (this != &other) {
@@ -21,6 +21,14 @@ void Cell::setState(int newState) {
 
 void Cell::set_random_State() {
     _state = rand() % 2;
+}
+
+void Cell::set_neighbors(int alive_surr){
+    _neighbors = alive_surr;
+}
+
+int Cell::get_alive_neighbors()const{
+    return _neighbors;
 }
 
 
