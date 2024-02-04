@@ -2,6 +2,10 @@
 This project was made as a part of course Advanced Programming by Ronak ([go68sor@mytum.de](mailto:go68sor@mytum.de)) and Samuel ([go68yug@mytum.de](mailto:go68yug@mytum.de))
 
 [Conway's Game Of Life](https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens) is an easy realization of a cellular automaton, which models dynamic but discrete systems. 
+
+To gain a more comprehensive and detailed understanding of the idea, you can visit the original project concept.
+https://gitlab.lrz.de/tum-i05/public/advprog-project-ideas/-/blob/master/game-of-life/gameoflife.md?ref_type=heads
+
 In this project, we create a simulation that realizes such systems.
 Rules:
 
@@ -14,20 +18,29 @@ A dead cell
 * will be reborn if it has exactly 3 neighbors
 * remains dead otherwise
 
-# Sprint 2:
+
+
+# Sprint 3:
 
 Definition of "Done"
-* The code is refactored into classes and OOP principles are observed
-* Classes for Cell and Grid have been added as well 
-* The simulation logic is also stored in a separate class (try to experiment here with a second different update rule for all cells)
-* A workflow that allows the user to specify a file to load via the command line is implemented. The workflow is also stored in a separate class
-* The option to create a random grid is added to the workflow (look at [this](https://www.cplusplus.com/reference/cstdlib/rand/) for reference)
-* The user can specify the number of time steps for which the simulation runs, and can start the simulation
-* The program does not exit after the last time step 
-* The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added
-* (optional) The simulation is animated in the terminal window (this can be done by clearing the terminal and adding delays between simulation steps)
+* The simulation does not use more memory than required (see optional last item, which is an extension of this)
+* A better file format is used (look at the PBM file format) and grids can be saved in this file format
+* The workflow includes the option to save the grid at every time step as an image file
+* Grids are saved correctly (maybe using the format grid_i.pbm ; open the files locally to see if the format is correctly implemented)
+* Unit test are implemented to test the dynamic grid size
+* A CMakelists or Makefile that builds and tests the application is created
 
-<!-- 
+## Cloning
+
+For cloning the project, the submodul 'googletest' is needed!
+
+```shell
+git clone --branch version3 https://gitlab.lrz.de/advprog2023/29.git
+cd 29
+git submodule update --init --recursive
+```
+
+
 ## Building
 
 Build GameOfLife in your terminal with:
@@ -37,18 +50,24 @@ mkdir build
 cd build
 cmake ..
 make
-``` -->
+```
 
 ## Running
 
 1. Linux:
-Just use the makefile to run it in linux
+
+Running the game:
 ```shell
-$ make 
-$ ./gameoflife
+./Gameoflife
+```
+
+Running Unit Test:
+```shell
+./DynamicGridtest
 ```
 
 2. Windows:
+
 Make some changes in files:
 
 Simulation.cpp: 
