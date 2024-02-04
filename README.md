@@ -58,7 +58,7 @@ make
 
 Running the game:
 ```shell
-./Gameoflife
+./GameOfLife 
 ```
 
 Running Unit Test:
@@ -108,27 +108,47 @@ Press (t) for using a testfile
 
 2. Option 1: Random-Grid:
 
-Enter number of rows, columns and timesteps. Right after entering those Informations, the Simulation will start!
+Enter number of rows, columns and timesteps. Right after entering those Informations, the random grid gets created. You now are able to decide if you want to save your generated Grids in a .pbm-format. If you do so, all files get saved in Folder 'Testfiles'.
 
 ```shell
 Enter the number of rows: 3
 Enter the number of columns: 3
-Enter the number of timesteps: 2
+Enter the number of timesteps: 4
 Creating a random grid...
-1 0 1 
-1 1 1 
-0 0 1 
+■ ■ ■ 
+■ ■ ■ 
+■ ■ ■ 
 
-Simulating the random grid for 2 timesteps...
+Simulating the grid for 4 timesteps...
+**********Choose**********
+Press (y) for saving all simulations in Pbm-Files
+Press (n) for continuing without saving
+```
+
+Note: In terminal white cells = Alive, in the pbm-format its other way around due to better visibility! Here in the README it’s not possible to show you the differet colour, but I think you got the idea how it should look like later.
+
+```shell
 Updated Grid -- Timestep 1
-1 0 1 0 
-1 0 1 1 
-0 0 1 0 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
 
 Updated Grid -- Timestep 2
-0 0 1 1 
-0 0 1 1 
-0 1 1 1 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
+
+Updated Grid -- Timestep 3
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
+
+Updated Grid -- Timestep 4
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
+■ ■ ■ ■ ■ 
 
 Do you want to start a new simulation? (y/n): 
 ```
