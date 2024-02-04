@@ -125,7 +125,7 @@ Press (y) for saving all simulations in Pbm-Files
 Press (n) for continuing without saving
 ```
 
-Note: In terminal white cells = Alive, in the pbm-format its other way around due to better visibility! Here in the README it’s not possible to show you the differet colour, but I think you got the idea how it should look like later.
+Note: In terminal white cells = Alive, in the pbm-format its other way around due to better visibility! Here in the README it’s not possible to show you the differet colors, but I think you got the idea how it should look like later.
 
 ```shell
 Updated Grid -- Timestep 1
@@ -157,54 +157,29 @@ After Simulation is finished, you can start again from the beginning, after ente
 3. Option 2: Testfile:
 
 Enter name of the file for input. <!-- and timesteps. Right after entering those Informations, the Simulation will start! -->
+The File has to be saved in the 'Testfile'-direktor! Currently there is only the file 'Testfile.pbm' saved. But feel free to create own files!
+```shell
+Testfile.pbm
+```
 
 File syntax: 
 First line should contain number of rows and columns and subsequent lines should have the initial grid.
 ```shell
-4 4
-0 1 0 0
-1 1 0 1
-1 1 0 0
-0 1 1 1
-```
-
-Enter the number of timesteps. Right after entering this Informations, the Simulation will start!
-```shell
+Choice: Testfile!
+Input the name of the file: 
+Testfile.pbm
 The Initial state of our Grid is:
-0 1 0 0
-1 1 0 1
-1 1 0 0
-0 1 1 1
+■ ■ ■ ■ 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
+■ ■ ■ ■ 
 
-Enter the number of timesteps: 3
-Simulating the grid for 3 timesteps...
-Updated Grid -- Timestep 1
-1 1 1 0
-0 0 0 0
-0 0 0 1
-1 1 1 0
-0 0 1 0
-
-Updated Grid -- Timestep 2
-0 1 0 0
-0 1 0 0
-0 1 1 0
-0 1 1 0
-0 1 1 1
-0 0 1 0
-
-Updated Grid -- Timestep 3
-0 0 0 0
-1 1 0 0
-1 0 0 0
-1 0 0 0
-0 0 0 1
-0 1 1 1
-
-Do you want to start a new simulation? (y/n):
 ```
 
-# Cleaning the directory
+Enter the number of timesteps. Right after entering this Informations, you can decide if you want to save the files before the Simulation starts!
+
+# Cleaning the directory 
+Not necessary if you use the linux building instruction!
 Just use the function :
 ```shell
 make clean

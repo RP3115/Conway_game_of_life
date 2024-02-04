@@ -46,8 +46,15 @@ int main() {
       namespace fs = std::filesystem;
       fs::path currentPath = fs::current_path();
 
+      // Convert the path to a string
+      std::string currentPathStr = currentPath.string();
+
+      // Delete the last 6 characters from the string (go back to original project directory! Away from build)
+      currentPathStr.erase(currentPathStr.size() - 6);
+
       // Construct the full path to the file
-      fs::path filePath = currentPath / "Testfiles" /  filename;
+      fs::path filePath = fs::path(currentPathStr) / "Testfiles" / filename;
+
       std::ifstream inputFile(filePath.string());
 
       if (!inputFile) {

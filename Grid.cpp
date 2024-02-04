@@ -44,7 +44,14 @@ void Grid::printGrid(bool saveGrid, int iteration) const {
         namespace fs = std::filesystem;
         // Get the current working directory
         fs::path currentPath = fs::current_path();
-        fs::path filePath = currentPath / "Testfiles" / (filename + "_" + std::to_string(iteration) + ".pbm");
+
+      // Convert the path to a string
+      std::string currentPathStr = currentPath.string();
+
+      // Delete the last 6 characters from the string (go back to original project directory! Away from build)
+      currentPathStr.erase(currentPathStr.size() - 6);
+
+        fs::path filePath = fs::path(currentPathStr) / "Testfiles" / (filename + "_" + std::to_string(iteration) + ".pbm");
 
         std::ofstream outFile(filePath.string(), std::ios::out | std::ios::binary);
 
