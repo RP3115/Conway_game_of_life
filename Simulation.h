@@ -11,6 +11,8 @@ class Simulation{
 
         //Simulation logic
         void update_Grid(Grid, int timesteps, bool saveSim);
+
+        void dynymic_gridsize(Grid &curr_Grid);
 };
 
 #endif

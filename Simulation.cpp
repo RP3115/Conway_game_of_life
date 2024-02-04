@@ -5,63 +5,71 @@
 
  Simulation::Simulation(){}
 
+ void Simulation::dynymic_gridsize(Grid &curr_Grid){
+
+    //Check if Border extension is needed////////////////////////////////////////////////////////
+    //Check if extension on left Border is needed:
+    int alive_at_border = 0;
+    for (auto i = 0; i < curr_Grid.size_row(); i++){                      
+        if (curr_Grid.getCell(i,0).getState() == 1) alive_at_border +=1;
+        else alive_at_border = 0;
+
+        if (alive_at_border == 3){
+            //std::cout << "new left Border needed" << std::endl;
+            curr_Grid.extendGridLEFT();
+            alive_at_border = 0;
+            break;
+        }
+    }
+
+    //Check if extension on right Border is needed:
+    for (auto i = 0; i < curr_Grid.size_row(); i++){                      
+        if (curr_Grid.getCell(i,curr_Grid.size_col()-1).getState() == 1) alive_at_border +=1;
+        else alive_at_border = 0;
+
+        if (alive_at_border == 3){
+            //std::cout << "new right Border needed" << std::endl;
+            curr_Grid.extendGridRIGHT();
+            alive_at_border = 0;
+            break;
+        }
+    }
+
+    //Check if extension on top Border is needed:
+    for (auto i = 0; i < curr_Grid.size_col(); i++){                      
+        if (curr_Grid.getCell(0,i).getState() == 1) alive_at_border +=1;
+        else alive_at_border = 0;
+
+        if (alive_at_border == 3){
+            //std::cout << "new top Border needed" << std::endl;
+            curr_Grid.extendGridTOP();
+            alive_at_border = 0;
+            break;
+        }
+    }
+
+    //Check if extension on bottom Border is needed:
+    for (auto i = 0; i < curr_Grid.size_col(); i++){                      
+        if (curr_Grid.getCell(curr_Grid.size_row()-1,i).getState() == 1) alive_at_border +=1;
+        else alive_at_border = 0;
+
+        if (alive_at_border == 3){
+            //std::cout << "new bottom Border needed" << std::endl;
+            curr_Grid.extendGridBOTTOM();
+            alive_at_border = 0;
+            break;
+        }
+    }
+ }
+
+
+
  void Simulation::update_Grid(Grid origin_Grid,int timesteps, bool saveSim){
     
     for (int counter = 1; counter <= timesteps; counter++){
         
-        //Check if Border extension is needed////////////////////////////////////////////////////////
-        //Check if extension on left Border is needed:
-        int alive_at_border = 0;
-        for (auto i = 0; i < origin_Grid.size_row(); i++){                      
-            if (origin_Grid.getCell(i,0).getState() == 1) alive_at_border +=1;
-            else alive_at_border = 0;
-
-            if (alive_at_border == 3){
-                //std::cout << "new left Border needed" << std::endl;
-                origin_Grid.extendGridLEFT();
-                alive_at_border = 0;
-                break;
-            }
-        }
-
-        //Check if extension on right Border is needed:
-        for (auto i = 0; i < origin_Grid.size_row(); i++){                      
-            if (origin_Grid.getCell(i,origin_Grid.size_col()-1).getState() == 1) alive_at_border +=1;
-            else alive_at_border = 0;
-
-            if (alive_at_border == 3){
-                //std::cout << "new right Border needed" << std::endl;
-                origin_Grid.extendGridRIGHT();
-                alive_at_border = 0;
-                break;
-            }
-        }
-
-        //Check if extension on top Border is needed:
-        for (auto i = 0; i < origin_Grid.size_col(); i++){                      
-            if (origin_Grid.getCell(0,i).getState() == 1) alive_at_border +=1;
-            else alive_at_border = 0;
-
-            if (alive_at_border == 3){
-                //std::cout << "new top Border needed" << std::endl;
-                origin_Grid.extendGridTOP();
-                alive_at_border = 0;
-                break;
-            }
-        }
-
-        //Check if extension on bottom Border is needed:
-        for (auto i = 0; i < origin_Grid.size_col(); i++){                      
-            if (origin_Grid.getCell(origin_Grid.size_row()-1,i).getState() == 1) alive_at_border +=1;
-            else alive_at_border = 0;
-
-            if (alive_at_border == 3){
-                //std::cout << "new bottom Border needed" << std::endl;
-                origin_Grid.extendGridBOTTOM();
-                alive_at_border = 0;
-                break;
-            }
-        }
+        //change grid size dynamically
+        dynymic_gridsize(origin_Grid);
 
 
         //Simulation logic / Count neigbhors /////////////////////////////////////////////////////////
