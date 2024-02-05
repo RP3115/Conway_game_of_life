@@ -54,8 +54,6 @@ make
 
 ## Running
 
-1. Linux:
-
 Running the game:
 ```shell
 ./GameOfLife 
@@ -64,36 +62,6 @@ Running the game:
 Running Unit Test:
 ```shell
 ./DynamicGridtest
-```
-
-2. Windows:
-
-Make some changes in files:
-
-Simulation.cpp: 
-At line 107 : Uncomment the windows part and comment the Linux part.
-```shell
-//Windows 
- system("cls"); //clears the terminal
-
-//Linux 
-//system("clear"); //clears the terminal
-```
-
-Makefile: 
-In the clean command change : 
-```shell
-#Windows
-	-del -fR gameoflife.exe *.o 
-#Linux
-#	rm gameoflife *.o
-```
-
-Just use the makefile to run it now.
-```shell
-make 
-
-gameoflife.exe
 ```
 
 ## Example output
@@ -115,9 +83,9 @@ Enter the number of rows: 3
 Enter the number of columns: 3
 Enter the number of timesteps: 4
 Creating a random grid...
+■   ■ 
 ■ ■ ■ 
-■ ■ ■ 
-■ ■ ■ 
+    ■ 
 
 Simulating the grid for 4 timesteps...
 **********Choose**********
@@ -129,26 +97,26 @@ Note: In terminal white cells = Alive, in the pbm-format its other way around du
 
 ```shell
 Updated Grid -- Timestep 1
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
+■   ■ 
+■   ■ ■ 
+    ■ 
 
 Updated Grid -- Timestep 2
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
+    ■ ■ 
+    ■ ■ 
+  ■ ■ ■ 
 
 Updated Grid -- Timestep 3
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
+    ■ ■   
+        ■ 
+  ■   ■   
+    ■     
 
 Updated Grid -- Timestep 4
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
-■ ■ ■ ■ ■ 
+      ■   
+        ■ 
+    ■ ■   
+    ■       
 
 Do you want to start a new simulation? (y/n): 
 ```
@@ -169,11 +137,21 @@ Choice: Testfile!
 Input the name of the file: 
 Testfile.pbm
 The Initial state of our Grid is:
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-■ ■ ■ ■ 
-
+                             
+                             
+                             
+              ■              
+            ■ ■ ■            
+          ■ ■ ■ ■ ■          
+        ■ ■       ■ ■        
+      ■ ■ ■       ■ ■ ■      
+        ■ ■       ■ ■        
+          ■ ■ ■ ■ ■          
+            ■ ■ ■            
+              ■              
+                             
+                             
+                             
 ```
 
 Enter the number of timesteps. Right after entering this Informations, you can decide if you want to save the files before the Simulation starts!
