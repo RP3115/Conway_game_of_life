@@ -59,6 +59,11 @@ cmake ..
 make
 ```
 
+If the submodule is not working, then clone this additionally in the "29" Directory:
+```shell
+git clone https://github.com/google/googletest.git
+```
+
 ## Running
 
 Running the game:
