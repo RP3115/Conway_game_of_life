@@ -39,56 +39,70 @@ int main() {
 
     } else if (choice == 't') {
 
-    std::cout << "Choice: Testfile!" <<std::endl<<"Input the name of the file: "<< std::endl;
-    std::string filename;std::cin>>filename;
-    
-    // Get the current working directory
-    namespace fs = std::filesystem;
-    fs::path currentPath = fs::current_path();
+      std::cout << "Choice: Testfile!" <<std::endl<<"Input the name of the file: "<< std::endl;
+      std::string filename;std::cin>>filename;
+      
+      // Get the current working directory
+      namespace fs = std::filesystem;
+      fs::path currentPath = fs::current_path();
 
-    // Construct the full path to the file
-    fs::path filePath = currentPath / filename;
-    std::ifstream inputFile(filePath.string());
+      // Convert the path to a string
+      std::string currentPathStr = currentPath.string();
 
-    if (!inputFile) {
-        std::cerr << "Error opening file: " << filename << std::endl;
-        exit(EXIT_FAILURE);
-    }
+      // Delete the last 6 characters from the string (go back to original project directory! Away from build)
+      currentPathStr.erase(currentPathStr.size() - 6);
 
-    std::string line;
-    int row,col;
-    //int timesteps;
-    std::getline(inputFile,line);
-    std::istringstream rc(line);
-        int num;
-        rc>>num;row=num;
-        rc>>num;col=num;
-        // rc>>num;timesteps=num;
-    Workflow myWorkflow(row,col);
-    Grid& g=myWorkflow.givegrid();
-    int i=0;
-    while (std::getline(inputFile, line)) {
-        std::istringstream iss(line);
-        int value;
-        int j=0;
-        while (iss >> value) {
-            g.setCell(i,j,value);
-            j++;
-        }
-        i++;
-    }
+      // Construct the full path to the file
+      fs::path filePath = fs::path(currentPathStr) / "Testfiles" / filename;
 
-    inputFile.close();
-    //end of input
-    std::cout<<"The Initial state of our Grid is:"<<std::endl;
-    myWorkflow.printgrid();
-    std::cout << "Enter the number of timesteps: ";
-    int timesteps;
-    std::cin >> timesteps;
-    myWorkflow.simulateGrid(timesteps);
+      std::ifstream inputFile(filePath.string());
+
+      if (!inputFile) {
+          std::cerr << "Error opening file: " << filename << std::endl;
+          exit(EXIT_FAILURE);
+      }
+
+      std::string line;
+      int row,col;
+      //int timesteps;
+      std::getline(inputFile,line);
+      std::getline(inputFile, line); //get second line of file
+
+      std::istringstream rc(line);
+          int num;
+          rc>>num;col=num;
+          rc>>num;row=num;
+          // rc>>num;timesteps=num;
+
+      Workflow myWorkflow(row,col);
+      Grid& g=myWorkflow.givegrid();
+      g.changeName(filename);
+      int i=0;
+      
+      while (std::getline(inputFile, line)) {
+          std::istringstream iss(line);
+          int value;
+          int j=0;
+      
+          while (iss >> value) {
+        
+              g.setCell(i,j,value);
+              j++;
+          }
+          i++;
+      }
+      
+      inputFile.close();
+      //end of input
+      std::cout<<"The Initial state of our Grid is:"<<std::endl;
+      myWorkflow.printgrid();
+      std::cout << "Enter the number of timesteps: ";
+      int timesteps;
+      std::cin >> timesteps;
+      myWorkflow.simulateGrid(timesteps);
     } else {
-      std::cout << "It's fine if you cannot make up your mind. Maybe another time then...\n";
-      std::exit(EXIT_FAILURE);
+        std::cout << "It's fine if you cannot make up your mind. Maybe another time then...\n";
+        std::exit(EXIT_FAILURE);
     }
 
     // Ask the user if they want to start a new simulation

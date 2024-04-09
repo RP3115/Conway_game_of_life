@@ -2,6 +2,10 @@
 This project was made as a part of course Advanced Programming by Ronak ([go68sor@mytum.de](mailto:go68sor@mytum.de)) and Samuel ([go68yug@mytum.de](mailto:go68yug@mytum.de))
 
 [Conway's Game Of Life](https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens) is an easy realization of a cellular automaton, which models dynamic but discrete systems. 
+
+To gain a more comprehensive and detailed understanding of the idea, you can visit the original project concept.
+https://gitlab.lrz.de/tum-i05/public/advprog-project-ideas/-/blob/master/game-of-life/gameoflife.md?ref_type=heads
+
 In this project, we create a simulation that realizes such systems.
 Rules:
 
@@ -14,20 +18,36 @@ A dead cell
 * will be reborn if it has exactly 3 neighbors
 * remains dead otherwise
 
-# Sprint 2:
+[Conway's Game Of Life](https://de.wikipedia.org/wiki/Conways_Spiel_des_Lebens) is an easy realization of a cellular automaton, which models dynamic but discrete systems. 
+In this project, we create a simulation that realizes such systems.
+Rules:
+
+A living cell
+* stays alive, if it hast exact 2 or 3 neighbors
+* dies due to loneliness if it has fewer neighbors
+* dies due to overpopulation if it has more neighbors
+
+# Sprint 3:
 
 Definition of "Done"
-* The code is refactored into classes and OOP principles are observed
-* Classes for Cell and Grid have been added as well 
-* The simulation logic is also stored in a separate class (try to experiment here with a second different update rule for all cells)
-* A workflow that allows the user to specify a file to load via the command line is implemented. The workflow is also stored in a separate class
-* The option to create a random grid is added to the workflow (look at [this](https://www.cplusplus.com/reference/cstdlib/rand/) for reference)
-* The user can specify the number of time steps for which the simulation runs, and can start the simulation
-* The program does not exit after the last time step 
-* The simulation is extended to an infinite grid: if a boundary of the grid is reached, additional rows/columns are added
-* (optional) The simulation is animated in the terminal window (this can be done by clearing the terminal and adding delays between simulation steps)
+* The simulation does not use more memory than required (see optional last item, which is an extension of this)
+* A better file format is used (look at the PBM file format) and grids can be saved in this file format
+* The workflow includes the option to save the grid at every time step as an image file
+* Grids are saved correctly (maybe using the format grid_i.pbm ; open the files locally to see if the format is correctly implemented)
+* Unit test are implemented to test the dynamic grid size
+* A CMakelists or Makefile that builds and tests the application is created
 
-<!-- 
+## Cloning
+
+For cloning the project, the submodul 'googletest' is needed!
+
+```shell
+git clone --branch version3 https://gitlab.lrz.de/advprog2023/29.git
+cd 29
+git submodule update --init --recursive
+```
+
+
 ## Building
 
 Build GameOfLife in your terminal with:
@@ -37,44 +57,23 @@ mkdir build
 cd build
 cmake ..
 make
-``` -->
+```
+
+If the submodule is not working, then clone this additionally in the "29" Directory:
+```shell
+git clone https://github.com/google/googletest.git
+```
 
 ## Running
 
-1. Linux:
-Just use the makefile to run it in linux
+Running the game:
 ```shell
-$ make 
-$ ./gameoflife
+./GameOfLife 
 ```
 
-2. Windows:
-Make some changes in files:
-
-Simulation.cpp: 
-At line 107 : Uncomment the windows part and comment the Linux part.
+Running Unit Test:
 ```shell
-//Windows 
- system("cls"); //clears the terminal
-
-//Linux 
-//system("clear"); //clears the terminal
-```
-
-Makefile: 
-In the clean command change : 
-```shell
-#Windows
-	-del -fR gameoflife.exe *.o 
-#Linux
-#	rm gameoflife *.o
-```
-
-Just use the makefile to run it now.
-```shell
-make 
-
-gameoflife.exe
+./DynamicGridtest
 ```
 
 ## Example output
@@ -89,27 +88,47 @@ Press (t) for using a testfile
 
 2. Option 1: Random-Grid:
 
-Enter number of rows, columns and timesteps. Right after entering those Informations, the Simulation will start!
+Enter number of rows, columns and timesteps. Right after entering those Informations, the random grid gets created. You now are able to decide if you want to save your generated Grids in a .pbm-format. If you do so, all files get saved in Folder 'Testfiles'.
 
 ```shell
 Enter the number of rows: 3
 Enter the number of columns: 3
-Enter the number of timesteps: 2
+Enter the number of timesteps: 4
 Creating a random grid...
-1 0 1 
-1 1 1 
-0 0 1 
+■   ■ 
+■ ■ ■ 
+    ■ 
 
-Simulating the random grid for 2 timesteps...
+Simulating the grid for 4 timesteps...
+**********Choose**********
+Press (y) for saving all simulations in Pbm-Files
+Press (n) for continuing without saving
+```
+
+Note: In terminal white cells = Alive, in the pbm-format its other way around due to better visibility! Here in the README it’s not possible to show you the differet colors, but I think you got the idea how it should look like later.
+
+```shell
 Updated Grid -- Timestep 1
-1 0 1 0 
-1 0 1 1 
-0 0 1 0 
+■   ■ 
+■   ■ ■ 
+    ■ 
 
 Updated Grid -- Timestep 2
-0 0 1 1 
-0 0 1 1 
-0 1 1 1 
+    ■ ■ 
+    ■ ■ 
+  ■ ■ ■ 
+
+Updated Grid -- Timestep 3
+    ■ ■   
+        ■ 
+  ■   ■   
+    ■     
+
+Updated Grid -- Timestep 4
+      ■   
+        ■ 
+    ■ ■   
+    ■       
 
 Do you want to start a new simulation? (y/n): 
 ```
@@ -118,54 +137,39 @@ After Simulation is finished, you can start again from the beginning, after ente
 3. Option 2: Testfile:
 
 Enter name of the file for input. <!-- and timesteps. Right after entering those Informations, the Simulation will start! -->
+The File has to be saved in the 'Testfile'-direktor! Currently there is only the file 'Testfile.pbm' saved. But feel free to create own files!
+```shell
+Testfile.pbm
+```
 
 File syntax: 
 First line should contain number of rows and columns and subsequent lines should have the initial grid.
 ```shell
-4 4
-0 1 0 0
-1 1 0 1
-1 1 0 0
-0 1 1 1
-```
-
-Enter the number of timesteps. Right after entering this Informations, the Simulation will start!
-```shell
+Choice: Testfile!
+Input the name of the file: 
+Testfile.pbm
 The Initial state of our Grid is:
-0 1 0 0
-1 1 0 1
-1 1 0 0
-0 1 1 1
-
-Enter the number of timesteps: 3
-Simulating the grid for 3 timesteps...
-Updated Grid -- Timestep 1
-1 1 1 0
-0 0 0 0
-0 0 0 1
-1 1 1 0
-0 0 1 0
-
-Updated Grid -- Timestep 2
-0 1 0 0
-0 1 0 0
-0 1 1 0
-0 1 1 0
-0 1 1 1
-0 0 1 0
-
-Updated Grid -- Timestep 3
-0 0 0 0
-1 1 0 0
-1 0 0 0
-1 0 0 0
-0 0 0 1
-0 1 1 1
-
-Do you want to start a new simulation? (y/n):
+                             
+                             
+                             
+              ■              
+            ■ ■ ■            
+          ■ ■ ■ ■ ■          
+        ■ ■       ■ ■        
+      ■ ■ ■       ■ ■ ■      
+        ■ ■       ■ ■        
+          ■ ■ ■ ■ ■          
+            ■ ■ ■            
+              ■              
+                             
+                             
+                             
 ```
 
-# Cleaning the directory
+Enter the number of timesteps. Right after entering this Informations, you can decide if you want to save the files before the Simulation starts!
+
+# Cleaning the directory 
+Not necessary if you use the linux building instruction!
 Just use the function :
 ```shell
 make clean

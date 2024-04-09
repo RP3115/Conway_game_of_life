@@ -17,6 +17,7 @@ public:
     void simulateGrid(int timesteps);
     void printgrid() const;
     Grid& givegrid();
+
 };
 
 #endif
